@@ -28,10 +28,10 @@ def display_metrics(selected, variant):
         ":green-badge[:material/grass: Grass] :violet-badge[Poison]"
     )
 
-def display_defences(variant):
+def display_defences(df, variant):
     st.write("Defences against types of damage")
     defences = [s for s in df.columns if s.startswith('against')]
-    st.table(get_variant(variant).rename(columns = {d:d.split('_')[1].title() for d in defences})[defences])
+    st.table(get_variant(df, variant).rename(columns = {d:d.split('_')[1].title() for d in defences})[defences])
 
 # Read in pokemon
 df = load_pokemon()
@@ -49,4 +49,4 @@ selected = get_variant(filtered_df, variant)
 
 display_metrics(selected, variant)
 
-display_defences(variant)
+display_defences(df, variant)
