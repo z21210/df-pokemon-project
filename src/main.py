@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 def load_pokemon():
     df = pd.read_csv("data/pokemon.csv")
