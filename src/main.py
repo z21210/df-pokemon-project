@@ -1,5 +1,10 @@
 import streamlit as st
 
+def load_pokemon():
+    df = pd.read_csv("data/pokemon.csv")
+    df.drop(columns=['base_friendship', 'base_experience'], inplace=True)
+    return df
+
 def get_pokemon(df, number):
     return df[
         (df["pokedex_number"] == number)
@@ -21,16 +26,20 @@ def display_metrics(selected, variant):
         "Type  \n"
         ":green-badge[:material/grass: Grass] :violet-badge[Poison]"
     )
-    
-'''
-stat   hp  atk def spe_atk spe_def speed
-min	1	5	5	10	    20	    5
-max	255	190	250	194	    250	    200
 
-st.divider()
-st.header("Components")
+# Read in pokemon
+df = load_pokemon()
 
-st.write("Pokemon Name")
-st.write("Abilities")
-abilities1, abilities2 = st.columns(2)
-'''
+st.title("Streamlit Pokemon Project")
+
+number = st.number_input("Choose a Pokedex Number", 1, 898, placeholder="Please enter a number between 1 and 898")
+
+# Filter the DataFrame based on the selected filters
+filtered_df = get_pokemon(df, number)
+names = filtered_df["name"].values
+
+variant = st.segmented_control("Variations", filtered_df["name"].values, default = names[0])
+selected = get_variant(filtered_df, variant)
+
+display_metrics(selected, variant)
+
