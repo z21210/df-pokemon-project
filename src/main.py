@@ -89,6 +89,12 @@ def display_graph(selected):
 
     fig = px.data.gapminder().query
 
+def display_defences(df, variant):
+    st.write("Defences against types of damage")
+    defences = [s for s in df.columns if s.startswith('against')]
+    renamed_defences = [d.split('_')[1].title() for d in defences]
+    st.table(get_variant(df, variant).rename(columns = {d:r for d,r in zip(defences,renamed_defences)})[renamed_defences])
+
 # Read in pokemon
 df = load_pokemon()
 
@@ -104,3 +110,6 @@ variant = st.segmented_control("Variations", filtered_df["name"].values, default
 selected = get_variant(filtered_df, variant)
 
 display_metrics(selected, variant)
+
+
+display_defences(df, variant)
