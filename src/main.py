@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 
 def load_pokemon():
     df = pd.read_csv("data/pokemon.csv")
@@ -87,7 +87,7 @@ def display_graph(selected):
         "Speed":selected["speed"].values[0]
     }
 
-    fig = px.data.gapminder().query
+    # fig = px.data.gapminder().query
 
 def display_defences(df, variant):
     st.write("Defences against types of damage")
