@@ -31,7 +31,8 @@ def display_metrics(selected, variant):
 def display_defences(df, variant):
     st.write("Defences against types of damage")
     defences = [s for s in df.columns if s.startswith('against')]
-    st.table(get_variant(df, variant).rename(columns = {d:d.split('_')[1].title() for d in defences})[defences])
+    renamed_defences = [d.split('_')[1].title() for d in defences]
+    st.table(get_variant(df, variant).rename(columns = {d:r for d,r in zip(defences,renamed_defences)})[renamed_defences])
 
 # Read in pokemon
 df = load_pokemon()
