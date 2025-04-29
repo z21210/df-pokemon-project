@@ -23,21 +23,25 @@ selected = filtered_df[
     (filtered_df["name"] == variant)
 ]
 
-selected
-
 st.header(names[0])
-st.write("Pokedex Number #", selected["pokedex_number"])
+st.write("Pokedex Number #", selected["pokedex_number"].values[0])
 st.image(f"https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/{number:03}.png", width=100)
 st.caption(selected["japanese_name"].values[0])
 st.metric(label="HP", value=selected["hp"].values[0])
+st.metric(label="Attack", value=selected["attack"].values[0])
 st.markdown(
     "Type  \n"
     ":green-badge[:material/grass: Grass] :violet-badge[Poison]"
 )
 
+#stat   hp  atk def spe_atk spe_def speed
+#min	1	5	5	10	    20	    5
+#max	255	190	250	194	    250	    200
 
 st.divider()
 st.header("Components")
+
+selected
 
 st.write("Pokemon Name")
 st.write("Abilities")
