@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 def load_pokemon():
     df = pd.read_csv("data/pokemon.csv")
@@ -86,7 +87,7 @@ def display_graph(selected):
         "Speed":selected["speed"].values[0]
     }
 
-    st.bar_chart(attributes, x="Attribute", y="Value", stack=False)
+    fig = px.data.gapminder().query
 
 # Read in pokemon
 df = load_pokemon()
