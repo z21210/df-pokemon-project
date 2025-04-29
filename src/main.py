@@ -1,6 +1,6 @@
 import streamlit as st
-from src.load import load_pokemon
-from src.streamlit import *
+from ..src.load import load_pokemon
+from ..src.streamlit import *
 
 # Read in pokemon
 df = load_pokemon()
